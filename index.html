@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>* (It's pitch black...)</title>
+    <style>
+        /* Base styling for the classic Toby Fox vibe */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .teaser-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        /* Enigmatic, low-contrast text */
+        .cryptic-text {
+            color: #222222; /* Almost invisible against black */
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            transition: color 0.5s ease;
+        }
+
+        /* Reveal the text slightly if they hover over it */
+        .cryptic-text:hover {
+            color: #555555;
+        }
+
+        /* The interactive centerpiece (e.g., the door or tree) */
+        .interactive-object {
+            width: 100px;
+            height: 100px;
+            background-color: #111111;
+            border: 2px dashed #333333;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-object:hover {
+            border-color: #00ffcc; /* Dark World neon glow */
+            box-shadow: 0 0 15px #00ffcc;
+        }
+
+        /* Hidden dialogue box that pops up */
+        .textbox {
+            display: none;
+            border: 3px solid #ffffff;
+            padding: 15px;
+            width: 80%;
+            max-width: 500px;
+            margin-top: 30px;
+            text-align: left;
+            background-color: #000000;
+        }
+
+        .asterisk {
+            color: #ffffff;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="teaser-container">
+        <!-- A subtle hint hidden in plain sight -->
+        <div class="cryptic-text">THIS EXPERIMENT SEEMS VERY INTERESTING</div>
+
+        <!-- The mysterious object to click -->
+        <div class="interactive-object" id="mysteryObject"></div>
+
+        <!-- The Undertale/Deltarune style text box -->
+        <div class="textbox" id="dialogueBox">
+            <span class="asterisk">*</span><span id="typewriterText"></span>
+        </div>
+    </div>
+
+    <script>
+        const object = document.getElementById('mysteryObject');
+        const box = document.getElementById('dialogueBox');
+        const textElement = document.getElementById('typewriterText');
+        
+        const message = "If you only had the [BLANK], your luck might have gone another way.";
+        let index = 0;
+
+        object.addEventListener('click', () => {
+            box.style.display = 'block';
+            textElement.innerHTML = '';
+            index = 0;
+            typeWriter();
+        });
+
+        // Simple typewriter effect for dialogue
+        function typeWriter() {
+            if (index < message.length) {
+                textElement.innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50); // Adjust speed here
+            }
+        }
+    </script>
+</body>
+</html>
